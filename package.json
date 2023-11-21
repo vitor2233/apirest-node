@@ -1,0 +1,28 @@
+{
+  "name": "apirest-node",
+  "version": "1.0.0",
+  "description": "Feito através do curso ignite da Rocketseat",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.9.3",
+    "eslint": "^8.54.0",
+    "ts-node": "^10.9.1",
+    "tsx": "^4.2.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.3",
+    "knex": "^3.0.1",
+    "sqlite3": "^5.1.6",
+    "zod": "^3.22.4"
+  }
+}
