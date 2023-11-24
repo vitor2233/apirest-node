@@ -2,6 +2,7 @@ import { expect, it, beforeAll, afterAll, describe, beforeEach, afterEach } from
 import { execSync } from 'node:child_process'
 import request from 'supertest'
 import { app } from '../src/app'
+import { any } from 'zod'
 
 describe('Rotas transaction', () => {
     beforeAll(async () => {
@@ -117,6 +118,36 @@ describe('Rotas transaction', () => {
             { amount: 400 }
         )
         expect(summaryResponse.statusCode).toEqual(200)
+    })
+
+    it.only('should be able to update transaction', async () => {
+        const createTransactionResponse = await request(app.server)
+            .post('/transactions')
+            .send({
+                title: 'New transaction',
+                amount: 50,
+                type: 'credit'
+            })
+
+        const cookies = createTransactionResponse.get('Set-Cookie')
+
+        const listTransactionsResponse = await request(app.server)
+            .get('/transactions')
+            .set('Cookie', cookies)
+            .send()
+
+        const transactionId = listTransactionsResponse.body.transactions[0].id
+
+        const updateResponse = await request(app.server)
+            .put('/transactions/' + transactionId)
+            .set('Cookie', cookies)
+            .send({
+                title: 'Car transaction',
+                amount: 100,
+                type: 'credit'
+            })
+
+        expect(updateResponse.statusCode).toEqual(200)
     })
 })
 
