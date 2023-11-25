@@ -87,7 +87,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
             if (body.error.errors[0].path.at(0) == "amount") {
                 messageError = "Amount inválido"
             }
-            return reply.status(400).send("Amount inválido")
+            return reply.status(400).send(messageError)
         }
         const { title, amount, type } = body.data;
 

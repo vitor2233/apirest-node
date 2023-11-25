@@ -4,3 +4,4 @@ db/app.db
 .env
 .env.test
 db/*.db
+build
